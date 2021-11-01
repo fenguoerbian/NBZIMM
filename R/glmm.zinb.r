@@ -94,7 +94,8 @@ glmm.zinb <- function (fixed, random, data, correlation,
         zero.eta <- fit.zinb$linear.predictors
       }
       else{
-        fit.zinb <- suppressWarnings(glmmPQL(fixed=fm, random=zi_random, family=binomial, data=data, verbose = FALSE))
+        fit.zinb <- suppressWarnings(glmmPQL(fixed=fm, random=zi_random, family=binomial, data=data, verbose = FALSE, 
+                                             control = lmeControl(returnObject = TRUE)))
         zero.eta <- fitted(fit.zinb)
         if (!is.null(fit.zinb$offset)) zero.eta <- zero.eta + fit.zinb$offset
       }
